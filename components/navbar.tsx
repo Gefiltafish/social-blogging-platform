@@ -25,7 +25,12 @@ export default function Navbar() {
             </li>
             <li>
               <Link href={`/${username}`}>
-                <Image src={user?.photoURL} alt="user photo" />
+                <Image
+                  width={50}
+                  height={50}
+                  src={user?.photoURL}
+                  alt="user photo"
+                />
               </Link>
             </li>
           </>

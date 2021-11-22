@@ -66,7 +66,6 @@ export default function Post(props) {
   const postRef = doc(firestore, props.path);
 
   const [realtimePost] = useDocumentData(postRef);
-  console.log(realtimePost);
 
   const post = realtimePost || props.post;
 

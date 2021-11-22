@@ -1,9 +1,7 @@
-import Image from "next/image";
-
 export default function UserProfile({ user }) {
   return (
     <div className="box-center">
-      <Image
+      <img
         src={user.photoURL || "/hacker.jpeg"}
         className="card-img-center"
         alt="user photo"

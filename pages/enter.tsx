@@ -5,6 +5,8 @@ import { UserContext } from "../lib/context";
 import { doc, getDoc, writeBatch } from "firebase/firestore";
 import Image from "next/image";
 import debounce from "lodash.debounce";
+import bearPic from "../public/bear.jpeg";
+import googleLogo from "../public/google-logo.jpeg";
 
 export default function EnterPage({}) {
   const { user, username } = useContext(UserContext);
@@ -26,13 +28,21 @@ export default function EnterPage({}) {
 
 function SignInButton() {
   const signInWithGoogle = async () => {
-    await signInWithPopup(auth, googleAuthProvider);
+    try {
+      await signInWithPopup(auth, googleAuthProvider);
+    } catch {
+      console.warn("SignIn Closed by user");
+    }
   };
 
   return (
-    <button className="btn-google" onClick={signInWithGoogle}>
-      <Image src="/google-logo.png" alt="Google logo" /> Sign in with Google
-    </button>
+    <>
+      <button className="btn-google" onClick={signInWithGoogle}>
+        <Image width={25} height={25} src={googleLogo} alt="Google logo" />
+        <span>Sign in with Google</span>
+      </button>
+      <Image width={1200} height={700} src={bearPic} placeholder="blur" />
+    </>
   );
 }
 
