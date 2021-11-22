@@ -3,6 +3,7 @@ import { auth, firestore, googleAuthProvider } from "../lib/firebase";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context";
 import { doc, getDoc, writeBatch } from "firebase/firestore";
+import Image from "next/image";
 import debounce from "lodash.debounce";
 
 export default function EnterPage({}) {
@@ -30,7 +31,7 @@ function SignInButton() {
 
   return (
     <button className="btn-google" onClick={signInWithGoogle}>
-      <img src="/google-logo.png" alt="Google logo" /> Sign in with Google
+      <Image src="/google-logo.png" alt="Google logo" /> Sign in with Google
     </button>
   );
 }
@@ -46,9 +47,22 @@ function UserNameForm() {
 
   const { user, username } = useContext(UserContext);
 
+  const checkUsername = useCallback(
+    debounce(async (username) => {
+      if (username.length >= 3) {
+        const ref = doc(firestore, `usernames/${username}`);
+        const docSnap = await getDoc(ref);
+        console.log("Firestore read executed");
+        setIsValid(!docSnap.exists());
+        setLoading(false);
+      }
+    }, 500),
+    []
+  );
+
   useEffect(() => {
     checkUsername(formValue);
-  }, [formValue]);
+  }, [formValue, checkUsername]);
 
   const onChange = (e) => {
     const val = e.target.value.toLowerCase();
@@ -66,19 +80,6 @@ function UserNameForm() {
       setIsValid(false);
     }
   };
-
-  const checkUsername = useCallback(
-    debounce(async (username) => {
-      if (username.length >= 3) {
-        const ref = doc(firestore, `usernames/${username}`);
-        const docSnap = await getDoc(ref);
-        console.log("Firestore read executed");
-        setIsValid(!docSnap.exists());
-        setLoading(false);
-      }
-    }, 500),
-    []
-  );
 
   const onSubmit = async (e) => {
     e.preventDefault();

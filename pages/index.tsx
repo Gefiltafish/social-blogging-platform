@@ -14,7 +14,7 @@ import PostFeed from "../components/PostFeed";
 
 const LIMIT = 1;
 
-export async function getServerSiderProps(context) {
+export async function getServerSideProps(context) {
   const postsQuery = query(
     collectionGroup(firestore, "posts"),
     where("published", "==", true),
