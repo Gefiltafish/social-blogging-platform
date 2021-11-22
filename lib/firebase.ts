@@ -2,17 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import {
   collection,
-  FieldValue,
   getDocs,
-  getDocsFromCache,
-  getDocsFromServer,
   getFirestore,
   limit,
   query,
   Timestamp,
   where,
 } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDfvTjFTYz_QCHc0nlpSL_2k4weVvRHc2g",
@@ -23,13 +20,6 @@ const firebaseConfig = {
   appId: "1:85716977881:web:6b9d0712dc3e6fa7a796c8",
   measurementId: "G-PVS6BWR8Z8",
 };
-
-//@ts-ignore
-// if (!firebase.apps.length) {
-//   firebase.initializeApp(firebaseConfig);
-// }
-
-// export const auth = firebase.auth();
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

@@ -1,10 +1,4 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
 import Loader from "../components/Loader";
-import toast from "react-hot-toast";
-import { GetServerSideProps } from "next";
 import {
   collectionGroup,
   getDocs,
@@ -14,7 +8,7 @@ import {
   startAfter,
   where,
 } from "@firebase/firestore";
-import { firestore, postToJSON } from "../lib/firebase";
+import { firestore, fromMillis, postToJSON } from "../lib/firebase";
 import { useState } from "react";
 import PostFeed from "../components/PostFeed";
 
