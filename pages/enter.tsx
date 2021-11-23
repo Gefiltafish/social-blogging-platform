@@ -41,7 +41,13 @@ function SignInButton() {
         <Image width={25} height={25} src={googleLogo} alt="Google logo" />
         <span>Sign in with Google</span>
       </button>
-      <Image width={1200} height={700} src={bearPic} placeholder="blur" />
+      <Image
+        width={1200}
+        height={700}
+        src={bearPic}
+        placeholder="blur"
+        alt="bear picture"
+      />
     </>
   );
 }
